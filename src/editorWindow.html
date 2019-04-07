@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+
+    <title>Mi Band 2 Date Editor - Editor</title>
+
+    <!-- Hide Scrollbar -->
+    <style> ::-webkit-scrollbar { display: none; } </style>
+
+    <!-- jQuery (Should be declared before other JS imports) -->
+    <script> 
+      let $ = require("jquery"); 
+      require('popper.js');
+      require("bootstrap");
+    </script>
+
+    <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <!-- Fontawesome CSS -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <style>
+    .editorSquareOff {
+        width: 32px;
+        height: 32px;
+        background-color: #EEEEEE;
+        border: 1px solid #101010;
+    }
+
+    .editorSquareOff:hover {
+        width: 32px;
+        height: 32px;
+        background-color: #CCCCCC;
+        border: 1px solid #222222;
+        box-shadow: 0px 0px 5px #222222;
+    }
+
+    .editorSquareOn {
+        width: 32px;
+        height: 32px;
+        background-color: #101010;
+        border: 1px solid #101010;
+    }
+
+    .editorSquareOn:hover {
+        width: 32px;
+        height: 32px;
+        background-color: #444444;
+        border: 1px solid #222222;
+        box-shadow: 0px 0px 5px #222222;
+    }
+
+    .btn {
+        margin-left: 4px;
+        margin-right: 4px;
+    }
+
+    body {
+        overflow-x: hidden;
+        overflow-y: hidden;
+		border-color: #343a40;
+	    border-left-style: solid;
+	    border-right-style: solid;
+	    border-left-width: 8px;
+	    border-right-width: 8px;
+    }
+	
+	.footer {
+		height:8px;
+		margin-top: -8px; /* Höhe des Footers */
+		position: fixed;
+		width: 100%;
+		bottom: 0;
+		background-color: #343a40;
+	}
+    
+    </style>
+
+
+  </head>
+  <body style="background-color: #EEEEEE">
+
+    <nav class="navbar navbar-dark bg-dark" style="-webkit-app-region: drag">
+      <a class="navbar-brand" href="#"><i class="fas fa-stopwatch" style="font-size: 20px"></i>&nbsp;Mi Band 2 Date Editor</a>
+    </nav>
+
+    <div class="container">
+        <div id="editorTable"></div>
+    </div>
+
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col control form-inline">
+                <label for="input_newWidth">Decrease width to: </label>
+                <span id="newWidth_group"><input type="number" class="form-control" id="input_newWidth" value="0"></span>
+                <button type="button" class="btn btn-small btn-info" id="but_saveNewWidth">Apply</button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="container">
+        <div class="form-inline">
+            <button type="button" class="btn btn-sm btn-warning" id="but_clearall">Clear all</button>
+            <button type="button" class="btn btn-sm btn-danger" id="but_reset">Reset Changes</button>
+            <button type="button" class="btn btn-sm btn-success" id="but_saveclose">Save Changes & Close</button>
+            <button type="button" class="btn btn-sm btn-danger" id="but_close">Discard & Close</button>
+        </div>
+    </div>
+    <hr>
+	
+	<footer class="footer"></footer>
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+      // You can also require other files to run in this process
+      require('./renderer_Editor.js');
+    </script>
+  </body>
+</html>

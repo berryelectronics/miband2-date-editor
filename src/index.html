@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+
+    <title>Mi Band 2 Date Editor</title>
+
+    <!-- Hide Scrollbar -->
+    <style> ::-webkit-scrollbar { display: none; } </style>
+
+    <!-- jQuery (Should be declared before other JS imports) -->
+    <script> 
+      let $ = require("jquery"); 
+      require('popper.js');
+      require("bootstrap");
+    </script>
+  </head>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <!-- Fontawesome CSS -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+  <style>
+	body {
+	  border-color: #343a40;
+	  border-left-style: solid;
+	  border-right-style: solid;
+	  border-left-width: 8px;
+	  border-right-width: 8px;
+	}
+    .page-content {
+      margin-top: 100px;
+    }
+
+    .navbarIcon {
+      color: #EEEEEE;
+      font-size: 18px;
+    }
+
+    .navbarIcon.fa-window-minimize:hover {
+      color: #ffc107;
+    }
+
+    .navbarIcon.fa-window-maximize:hover {
+      color: #28a745;
+    }
+
+    .navbarIcon.fa-window-close:hover {
+      color: #dc3545;
+    }
+	
+	.footer {
+		height:8px;
+		margin-top: -8px; /* Höhe des Footers */
+		position: fixed;
+		width: 100%;
+		bottom: 0;
+		background-color: #343a40;
+	}
+	
+  </style>
+
+  <body style="background-color: #EEEEEE">
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <a class="navbar-brand" href="#" style="-webkit-app-region: drag"><i class="fas fa-stopwatch" style="font-size: 20px"></i>&nbsp;Mi Band 2 Date Editor</a>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLoadLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-file-code fa-sm"></i>&nbsp;&nbsp;Load File...&nbsp;&nbsp;
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownLoadLink">
+              <button class="dropdown-item" id="but_loadFirmware"><i class="fas fa-cogs fa-sm"></i>&nbsp;&nbsp;Firmware File&nbsp;&nbsp;</button> 
+              <button class="dropdown-item" id="but_loadTableData"><i class="fas fa-table fa-sm"></i>&nbsp;&nbsp;Table Data File&nbsp;&nbsp;</button> 
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSaveLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-save fa-sm"></i>&nbsp;&nbsp;Save File...&nbsp;&nbsp;
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownSaveLink">
+              <button class="dropdown-item" id="but_saveFirmware"><i class="fas fa-cogs fa-sm"></i>&nbsp;&nbsp;Firmware File&nbsp;&nbsp;</button> 
+              <button class="dropdown-item" id="but_saveTableData"><i class="fas fa-table fa-sm"></i>&nbsp;&nbsp;Table Data File&nbsp;&nbsp;</button> 
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fas fa-window-minimize navbarIcon" id="window-minimize"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="window-maximize-a"><i class="fas fa-window-maximize navbarIcon" id="window-maximize"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fas fa-window-close navbarIcon" id="window-close"></i></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container page-content" style="font-size: 14px">
+      <div class="row">
+        <div class="col-1" style="width: 100%"></div>
+        <div class="col-5" style="width: 100%">
+
+          <div class="card bg-success text-white" style="margin-left: 0px; box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); width: 100%">
+            <div class="card-header">
+              Character Table
+            </div>
+            <div class="card-body bg-light text-dark">
+              <table class="table table-striped table-bordered table-sm" id="character-table"></table>
+            </div>
+          </div><br><br>
+
+        </div>
+        <div class="col-1" style="width: 100%"></div>
+        <div class="col-5" style="width: 100%">
+          <div class="card bg-secondary text-white" style="box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); width: 100%">
+            <div class="card-header">
+              Day of the Week Text Table
+            </div>
+            <div class="card-body bg-light text-dark">
+              <table class="table table-striped table-bordered table-sm" id="day-of-week-table"></table>
+            </div>
+          </div>
+
+          <br>
+          <br>
+
+          <div class="card bg-secondary text-white" style="box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);">
+            <div class="card-header">
+              Month Text Table
+            </div>
+            <div class="card-body bg-light text-dark">
+              <table class="table table-striped table-bordered table-sm" id="month-table"></table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    
+	
+	<footer class="footer"></footer>
+	
+    <!-- <button type="button" class="btn btn-link" id="test2">Link</button> -->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+      // You can also require other files to run in this process
+      require('./rendererMain.js');
+      </script>
+  </body>
+</html>

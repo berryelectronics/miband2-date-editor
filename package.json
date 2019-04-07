@@ -1,0 +1,64 @@
+{
+  "name": "miband2-date-editor",
+  "productName": "Mi Band 2 Date Editor",
+  "version": "1.0.0",
+  "description": "With this Electron App, you can modify nearly every Firmware file for the Xiaomi Mi Band 2 and change the Date Text on the Start Screen (Mon. Apr 7) to another language and change the represenation of the characters itself!",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
+  "keywords": [
+    "Electron",
+    "Mi Band 2",
+    "Mi Band",
+    "Xiaomi",
+    "Firmware"
+  ],
+  "author": "berryelectronics - Matthias Nowak",
+  "license": "MIT",
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "miband2-date-editor"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "electron-squirrel-startup": "^1.0.0",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.15.0"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.34",
+    "@electron-forge/maker-deb": "^6.0.0-beta.34",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.34",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.34",
+    "@electron-forge/maker-zip": "^6.0.0-beta.34",
+    "electron": "^4.1.4"
+  }
+}
